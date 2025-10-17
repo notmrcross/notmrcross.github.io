@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Black Room</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Courier New', monospace;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      transition: background 1s ease;
+    }
+
+    .mist {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, rgba(0,0,0,1) 70%);
+      mix-blend-mode: lighten;
+      animation: drift 20s infinite alternate;
+      pointer-events: none;
+    }
+
+    @keyframes drift {
+      from { transform: translateX(-10px) translateY(-10px); }
+      to { transform: translateX(10px) translateY(10px); }
+    }
+
+    .hidden-text {
+      opacity: 0;
+      transition: opacity 1s ease;
+      font-size: 2rem;
+      letter-spacing: 3px;
+      text-shadow: 0 0 10px #fff;
+    }
+
+    .hidden-text.show {
+      opacity: 1;
+    }
+
+    .secret {
+      position: absolute;
+      top: 43%;
+      left: 27%;
+      width: 60px;
+      height: 60px;
+      cursor: pointer;
+      opacity: 0; /* invisible */
+    }
+
+    .glow {
+      position: absolute;
+      bottom: 10%;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.02) 0%, transparent 80%);
+      animation: pulse 6s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.4; }
+      50% { transform: scale(1.3); opacity: 0.8; }
+    }
+  </style>
+</head>
+<body>
+  <div class="mist"></div>
+  <div class="glow"></div>
+  <div class="hidden-text" id="secretText">Jim Sanborn</div>
+  <div class="secret" id="secretArea"></div>
+
+  <script>
+    const secretArea = document.getElementById('secretArea');
+    const secretText = document.getElementById('secretText');
+
+    secretArea.addEventListener('click', () => {
+      secretText.classList.add('show');
+    });
+  </script>
+</body>
+</html>
