@@ -80,12 +80,25 @@
   <div class="hidden-text" id="secretText">Jim Sanborn</div>
   <div class="secret" id="secretArea"></div>
 
+  <!-- 🎧 Background Music -->
+  <audio id="bg-music" src="mystery.mp3" autoplay loop></audio>
+
   <script>
+    // Handle secret click
     const secretArea = document.getElementById('secretArea');
     const secretText = document.getElementById('secretText');
 
     secretArea.addEventListener('click', () => {
       secretText.classList.add('show');
+    });
+
+    // Handle music volume
+    const music = document.getElementById('bg-music');
+    music.volume = 0.4;
+
+    // Some browsers block autoplay until interaction
+    document.body.addEventListener('click', () => {
+      if (music.paused) music.play();
     });
   </script>
 </body>
